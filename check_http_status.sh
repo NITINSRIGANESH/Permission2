@@ -1,14 +1,10 @@
 #!/bin/bash
+STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}\n" http://guvi.in)
 
-# Use curl to get the HTTP status code for guvi.in
-status_code=$(curl -o /dev/null -s -w "%{http_code}" https://www.guvi.in)
+echo "HTTP Status Code: $STATUS_CODE"
 
-# Print the status code
-echo "HTTP Status Code: $status_code"
-
-# Check if status code is 200 (OK)
-if [ "$status_code" -eq 200 ]; then
-    echo "Success: Website is accessible."
+if [ "$STATUS_CODE" -eq 200 ]; then
+  echo "Success: Website is accessible."
 else
-    echo "Failure: Website returned error code $status_code."
+  echo "Failure: Website returned an error code."
 fi
